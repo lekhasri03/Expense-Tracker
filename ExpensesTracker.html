@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+       
+        .two{
+            float: right;
+            width: 50%;
+            background-color: rgba(167, 95, 167, 0.537);
+            border-radius: 20px;
+            margin-left: 20px;
+            
+            height: 500px;
+            box-shadow: 0 10px 10px rgba(14, 13, 13, 0.1);
+            border: 1px solid black;
+
+        }
+
+        div{
+            float: left;
+            background-color:rgb(182, 182, 220);
+            border-radius: 20px;
+            width: 45%;
+            height: 500px;
+            box-shadow: 0 50px 50px rgba(14, 13, 13, 0.1);
+            border: 1px solid black;
+
+        }
+        .one{
+            margin-left: 40px;
+        }
+       h1::first-letter{
+        color: purple;
+       }
+
+    </style>
+</head>
+<body>
+
+  
+        <script>
+            function addExpenses() {
+                var expensesName = document.getElementById("expensesName").value;
+                var amount = document.getElementById("amount").value;
+    
+                if (expensesName && amount) {
+                    var expenseItem = document.createElement("li");
+                    expenseItem.innerHTML = `
+                        <span>${expensesName}: $${amount}</span>
+                        <button onclick="editExpense(this)">Edit</button>
+                        <button onclick="deleteExpense(this)">Delete</button>
+                    `;
+                    document.getElementById("expenses").appendChild(expenseItem);
+                    document.getElementById("expensesName").value = "";
+                    document.getElementById("amount").value = "";
+                } else {
+                    alert("Please enter both Expenses and Amount");
+                }
+            }
+    
+            function editExpense(element) {
+                var expenseItem = element.parentNode;
+                var expenseDetails = expenseItem.querySelector("span").innerText.split(": $");
+                var expensesName = expenseDetails[0];
+                var amount = expenseDetails[1];
+                document.getElementById("expensesName").value = expensesName;
+                document.getElementById("amount").value = amount;
+                expenseItem.remove();
+            }
+    
+            function deleteExpense(element) {
+                var expenseItem = element.parentNode;
+                expenseItem.remove();
+            }
+        </script>
+<div>
+     <h1 class="one" style="font-family: segoe script;">Expenses tracker</h1>
+        <h3 class="one">Expenses Name</h3>
+        <input  class="one" type="text" name="expensesName" id="expensesName" placeholder="Expenses Name">
+        <br>
+        <h3 class="one">Amount</h3>
+        <input class="one" type="number" name="amount" id="amount" ><br><br>
+        <button onclick="addExpenses()" class="one">Add Expenses</button>
+        <br><br>
+    </div>
+
+    <div class="two">
+        <center><h1 style="font-family: segoe script;"></h1></center>
+        <ul id="expenses"></ul>
+    </div>
+        
+
+
+</body>
+</html>
